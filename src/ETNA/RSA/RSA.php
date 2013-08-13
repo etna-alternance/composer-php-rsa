@@ -23,7 +23,7 @@ class RSA
             throw new \Exception("Bad Public Key");
         }
         
-        return new self($public, $private);
+        return new self($public_key, $private_key);
     }
     
     public static function loadPublicKey($path)
