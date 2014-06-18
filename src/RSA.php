@@ -6,7 +6,7 @@ class RSA
 {
     private $private = null;
     private $public  = null;
-    
+
     public static function loadPrivateKey($path, $password = "")
     {
         $file = realpath($path);
@@ -22,17 +22,17 @@ class RSA
         if ($public_key === false) {
             throw new \Exception("Bad Public Key");
         }
-        
+
         return new self($public_key, $private_key);
     }
-    
+
     public static function loadPublicKey($path)
     {
         $file = realpath($path);
         if ($file === false) {
             throw new \Exception("Public Key not found");
         }
-        
+
         $public_key = openssl_pkey_get_public("file://{$file}");
         if ($public_key === false) {
             throw new \Exception("Bad Public Key");
@@ -40,13 +40,13 @@ class RSA
 
         return new self($public_key);
     }
-    
+
     protected function __construct($public, $private = null)
     {
         $this->public  = $public;
         $this->private = $private;
     }
-    
+
     public function __destruct()
     {
         if ($this->private) {
@@ -59,7 +59,7 @@ class RSA
     {
         return openssl_pkey_get_details($this->public)["key"];
     }
-    
+
     /**
      * Signs some $data
      *
@@ -69,15 +69,15 @@ class RSA
     public function sign($data)
     {
         if (!$this->private) {
-            throw new Exception("Undefined Private Key");
+            throw new \Exception("Undefined Private Key");
         }
 
         if (!openssl_sign($data, $signature, $this->private)) {
-            throw new Exception("Undefined openssl error");
+            throw new \Exception("Undefined openssl error");
         }
         return base64_encode($signature);
     }
-    
+
     /**
      * Check Signature
      *
