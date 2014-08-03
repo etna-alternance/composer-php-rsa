@@ -20,8 +20,8 @@
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": {
-            "ETNA\\RSA": "src"
+        "psr-4": {
+            "ETNA\\RSA\\": "src"
         }
     },
     "extra": {
