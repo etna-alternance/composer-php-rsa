@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "285d04d576c705148358b0090acd0774",
+    "hash": "651e5abc94f070bcf22ccddb7f444cdb",
     "packages": [],
     "packages-dev": [
         {
@@ -129,6 +129,47 @@
                 "parser"
             ],
             "time": "2013-10-15 11:22:17"
+        },
+        {
+            "name": "gquemener/behat-analysis-extension",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gquemener/behat-analysis-extension.git",
+                "reference": "f3ce58d2f9b1dbb97f69d4840b23087aa9e25089"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gquemener/behat-analysis-extension/zipball/f3ce58d2f9b1dbb97f69d4840b23087aa9e25089",
+                "reference": "f3ce58d2f9b1dbb97f69d4840b23087aa9e25089",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "~2.4",
+                "php": ">=5.3.4"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.0@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quemener Gildas",
+                    "email": "gildas.quemener@gmail.com",
+                    "homepage": "http://github.com/gquemener"
+                }
+            ],
+            "description": "Analysis tool for Behat",
+            "time": "2013-07-17 18:19:51"
         },
         {
             "name": "symfony/config",
