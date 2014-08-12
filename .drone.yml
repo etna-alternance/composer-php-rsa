@@ -2,12 +2,8 @@ image: etna/drone-php
 env:
   - APPLICATION_ENV=drone
 script:
-  - mkdir -p tmp/keys
-  - echo "blu" > tmp/keys/blu.txt
-  - openssl genrsa  -out tmp/keys/private.key 2048
-  - openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key
   - composer install --dev --prefer-source
-  - bin/behat
+  - ./bin/test
 notify:
   slack:
     team: {{slackTeam}}
