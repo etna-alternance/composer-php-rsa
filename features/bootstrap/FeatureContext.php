@@ -19,6 +19,10 @@ class FeatureContext extends BehatContext
     private $identity;
     private $context;
     private $rsa;
+    private $public_path;
+    private $private_path;
+    private $exception;
+    private $sign;
 
     /**
      * Initializes context.
