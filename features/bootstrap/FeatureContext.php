@@ -37,22 +37,29 @@ class FeatureContext extends BehatContext
         }
 
         if (!file_exists("tmp/keys/private.key")) {
-            $return_var = false;
-            system("openssl genrsa  -out tmp/keys/private.key 2048", $return_var);
-            if ($return_var !== 0) {
-                throw new \Exception("Erreur lors de la génération de la clef privée");
-            }
+            self::safeExec(
+                "openssl genrsa  -out tmp/keys/private.key 2048",
+                "Erreur lors de la génération de la clef privée"
+            );
         }
 
         if (!file_exists("tmp/keys/public.key")) {
-            $return_var = false;
-            system("openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key", $return_var);
-            if ($return_var !== 0) {
-                throw new \Exception("Erreur lors de la génération de la clef publique");
-            }
+            self::safeExec(
+                "openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key",
+                "Erreur lors de la génération de la clef publique"
+            );
         }
 
         file_put_contents("tmp/keys/blu.txt", "blu");
+    }
+
+    private function safeExec($command, $error_message)
+    {
+        $return_var = null;
+        system($command, $return_var);
+        if (0 !== $return_var) {
+            throw \Exception($error_message);
+        }
     }
 
     /**
