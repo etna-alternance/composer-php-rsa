@@ -7,6 +7,11 @@ class RSA
     private $private = null;
     private $public  = null;
 
+    /**
+     * @param string $path to the private key
+     * @param string $password if the key is password protected
+     * @return RSA
+     */
     public static function loadPrivateKey($path, $password = "")
     {
         $file = realpath($path);
@@ -26,6 +31,10 @@ class RSA
         return new self($public_key, $private_key);
     }
 
+    /**
+     * @param string $path to the public key
+     * @return RSA
+     */
     public static function loadPublicKey($path)
     {
         $file = realpath($path);
