@@ -1,7 +1,0 @@
-#!/bin/bash
-
-mkdir -p tmp/keys
-echo "blu" > tmp/keys/blu.txt
-openssl genrsa  -out tmp/keys/private.key 2048
-openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key
-./bin/behat

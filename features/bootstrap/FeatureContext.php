@@ -28,6 +28,34 @@ class FeatureContext extends BehatContext
     }
 
     /**
+     * @BeforeSuite
+     */
+    public static function setUpEverything()
+    {
+        if (!file_exists("tmp/keys")) {
+            mkdir("tmp/keys", 0777, true);
+        }
+
+        if (!file_exists("tmp/keys/private.key")) {
+            $return_var = false;
+            system("openssl genrsa  -out tmp/keys/private.key 2048", $return_var);
+            if ($return_var !== 0) {
+                throw new \Exception("Erreur lors de la génération de la clef privée");
+            }
+        }
+
+        if (!file_exists("tmp/keys/public.key")) {
+            $return_var = false;
+            system("openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key", $return_var);
+            if ($return_var !== 0) {
+                throw new \Exception("Erreur lors de la génération de la clef publique");
+            }
+        }
+
+        file_put_contents("tmp/keys/blu.txt", "blu");
+    }
+
+    /**
     * @AfterScenario
     **/
     public function laCleDevraitEtreLibere()
