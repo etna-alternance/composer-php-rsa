@@ -16,6 +16,10 @@ class FeatureContext extends BehatContext
 {
     static private $_parameters;
 
+    private $identity;
+    private $context;
+    private $rsa;
+
     /**
      * Initializes context.
      * Every scenario gets it's own context object.
