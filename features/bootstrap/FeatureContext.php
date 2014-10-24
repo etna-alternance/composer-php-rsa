@@ -1,12 +1,6 @@
 <?php
 
-use Behat\Behat\Context\ClosuredContextInterface,
-    Behat\Behat\Context\TranslatedContextInterface,
-    Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode,
-    Behat\Gherkin\Node\TableNode;
-
+use Behat\Behat\Context\BehatContext;
 use ETNA\RSA\RSA;
 
 /**
@@ -61,6 +55,10 @@ class FeatureContext extends BehatContext
         file_put_contents("tmp/keys/blu.txt", "blu");
     }
 
+    /**
+     * @param string $command
+     * @param string $error_message
+     */
     private function safeExec($command, $error_message)
     {
         $return_var = null;
@@ -213,6 +211,10 @@ class FeatureContext extends BehatContext
         return __DIR__ . "/../../" . $relative_path;
     }
 
+    /**
+     * @param string $classname
+     * @param string $methodname
+     */
     public function mockMethod($classname, $methodname, $args='', $code='', $flags=RUNKIT_ACC_PUBLIC)
     {
         runkit_method_redefine($classname, $methodname, $args, $code, $flags);
