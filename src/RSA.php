@@ -15,16 +15,17 @@ class RSA
     public static function loadPrivateKey($path, $password = "")
     {
         $file = realpath($path);
-        if ($file === false) {
+        if (false === $file) {
             throw new \Exception("Private Key not found");
         }
 
         $private_key = openssl_pkey_get_private("file://{$file}", $password);
-        if ($private_key === false) {
+        if (false === $private_key) {
             throw new \Exception("Bad Private Key");
         }
-        $public_key  = openssl_pkey_get_public(openssl_pkey_get_details($private_key)["key"]);
-        if ($public_key === false) {
+
+        $public_key = openssl_pkey_get_public(openssl_pkey_get_details($private_key)["key"]);
+        if (false === $public_key) {
             throw new \Exception("Bad Public Key");
         }
 
@@ -38,12 +39,12 @@ class RSA
     public static function loadPublicKey($path)
     {
         $file = realpath($path);
-        if ($file === false) {
+        if (false === $file) {
             throw new \Exception("Public Key not found");
         }
 
         $public_key = openssl_pkey_get_public("file://{$file}");
-        if ($public_key === false) {
+        if (false === $public_key) {
             throw new \Exception("Bad Public Key");
         }
 
@@ -58,12 +59,15 @@ class RSA
 
     public function __destruct()
     {
-        if ($this->private) {
+        if (null !== $this->private) {
             openssl_free_key($this->private);
         }
         openssl_free_key($this->public);
     }
 
+    /**
+     * @return string
+     */
     public function getPublicKey()
     {
         return openssl_pkey_get_details($this->public)["key"];
@@ -77,13 +81,14 @@ class RSA
      */
     public function sign($data)
     {
-        if (!$this->private) {
+        if (null === $this->private) {
             throw new \Exception("Undefined Private Key");
         }
 
-        if (!openssl_sign($data, $signature, $this->private)) {
+        if (false === openssl_sign($data, $signature, $this->private)) {
             throw new \Exception("Undefined openssl error");
         }
+
         return base64_encode($signature);
     }
 
