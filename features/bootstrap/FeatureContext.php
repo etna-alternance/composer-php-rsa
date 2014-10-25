@@ -59,7 +59,7 @@ class FeatureContext extends BehatContext
      * @param string $command
      * @param string $error_message
      */
-    private function safeExec($command, $error_message)
+    private static function safeExec($command, $error_message)
     {
         $return_var = null;
         system($command, $return_var);
