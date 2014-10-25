@@ -34,18 +34,18 @@ class FeatureContext extends BehatContext
      */
     public static function setUpEverything()
     {
-        if (!file_exists("tmp/keys")) {
+        if (false === file_exists("tmp/keys")) {
             mkdir("tmp/keys", 0777, true);
         }
 
-        if (!file_exists("tmp/keys/private.key")) {
+        if (false === file_exists("tmp/keys/private.key")) {
             self::safeExec(
                 "openssl genrsa  -out tmp/keys/private.key 2048",
                 "Erreur lors de la génération de la clef privée"
             );
         }
 
-        if (!file_exists("tmp/keys/public.key")) {
+        if (false === file_exists("tmp/keys/public.key")) {
             self::safeExec(
                 "openssl rsa -in tmp/keys/private.key -pubout -out tmp/keys/public.key",
                 "Erreur lors de la génération de la clef publique"
@@ -73,11 +73,11 @@ class FeatureContext extends BehatContext
     **/
     public function laCleDevraitEtreLibere()
     {
-        if (isset($this->context) && $this->context === "volontairement fausse") {
+        if (true === isset($this->context) && $this->context === "volontairement fausse") {
             $this->mockMethod('ETNA\RSA\RSA', '__destruct');
         }
 
-        if (isset($this->rsa) && $this->rsa instanceof RSA) {
+        if (true === isset($this->rsa) && $this->rsa instanceof RSA) {
             $this->rsa->__destruct();
         }
     }
@@ -123,7 +123,7 @@ class FeatureContext extends BehatContext
      */
     public function jeDevraisObtenirUnObjetRsa()
     {
-        if (! $this->rsa instanceof RSA) {
+        if (false === $this->rsa instanceof RSA) {
             throw new Exception("Not a RSA object");
         }
     }
@@ -182,7 +182,7 @@ class FeatureContext extends BehatContext
             )
         );
 
-        if (isset($this->context) && $this->context === "volontairement fausse") {
+        if (true === isset($this->context) && $this->context === "volontairement fausse") {
             error_reporting(E_DEPRECATED);
         }
 
@@ -201,7 +201,7 @@ class FeatureContext extends BehatContext
         if ($public_path !== null) {
             $this->rsa = RSA::loadPublicKey($this->getAbsolutePath($public_path));
         }
-        if (!$this->rsa->verify($this->identity, $this->sign)) {
+        if (false === $this->rsa->verify($this->identity, $this->sign)) {
             throw new Exception("L'identité n'a pas pu être vérifiée");
         }
     }
