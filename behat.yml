@@ -1,5 +1,4 @@
 # behat.yml
-# behat.yml
 default:
     autoload:
         "": tests/bootstrap

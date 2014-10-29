@@ -26,7 +26,6 @@ class FeatureContext implements Context
      */
     public function __construct()
     {
-        // self::$_parameters = $parameters;
     }
 
     /**
