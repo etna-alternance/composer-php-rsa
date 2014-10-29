@@ -8,8 +8,6 @@ use ETNA\RSA\RSA;
  */
 class FeatureContext implements Context
 {
-    static private $_parameters;
-
     private $identity;
     private $context;
     private $rsa;
@@ -17,16 +15,6 @@ class FeatureContext implements Context
     private $private_path;
     private $exception;
     private $sign;
-
-    /**
-     * Initializes context.
-     * Every scenario gets it's own context object.
-     *
-     * @param array $parameters context parameters (set them up through behat.yml)
-     */
-    public function __construct()
-    {
-    }
 
     /**
      * @BeforeSuite
