@@ -3,7 +3,7 @@ env:
   - APPLICATION_ENV=drone
 script:
   - composer install --dev --prefer-source
-  - ./bin/test
+  - composer test
 notify:
   slack:
     team: {{slackTeam}}

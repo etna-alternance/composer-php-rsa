@@ -1,15 +1,13 @@
 <?php
 
-use Behat\Behat\Context\BehatContext;
+use Behat\Behat\Context\Context;
 use ETNA\RSA\RSA;
 
 /**
  * Features context.
  */
-class FeatureContext extends BehatContext
+class FeatureContext implements Context
 {
-    static private $_parameters;
-
     private $identity;
     private $context;
     private $rsa;
@@ -17,17 +15,6 @@ class FeatureContext extends BehatContext
     private $private_path;
     private $exception;
     private $sign;
-
-    /**
-     * Initializes context.
-     * Every scenario gets it's own context object.
-     *
-     * @param array $parameters context parameters (set them up through behat.yml)
-     */
-    public function __construct(array $parameters)
-    {
-        self::$_parameters = $parameters;
-    }
 
     /**
      * @BeforeSuite
@@ -59,7 +46,7 @@ class FeatureContext extends BehatContext
      * @param string $command
      * @param string $error_message
      */
-    private function safeExec($command, $error_message)
+    private static function safeExec($command, $error_message)
     {
         $return_var = null;
         system($command, $return_var);

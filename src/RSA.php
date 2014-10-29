@@ -85,7 +85,7 @@ class RSA
             throw new \Exception("Undefined Private Key");
         }
 
-        if (false === openssl_sign($data, $signature, $this->private)) {
+        if (false === @openssl_sign($data, $signature, $this->private)) {
             throw new \Exception("Undefined openssl error");
         }
 
