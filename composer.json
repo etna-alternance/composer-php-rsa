@@ -2,7 +2,7 @@
     "name": "etna/php-rsa",
     "description": "RSA Abstraction Class",
     "keywords": ["rsa", "crypto"],
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "ETNA",
@@ -14,11 +14,7 @@
         "php": ">=5.5"
     },
     "require-dev": {
-        "behat/behat": ">2.4",
-        "gquemener/behat-analysis-extension": "~1.0"
-    },
-    "config": {
-        "bin-dir": "bin"
+        "behat/behat": "~3.0"
     },
     "autoload": {
         "psr-4": {

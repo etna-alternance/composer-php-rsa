@@ -1,12 +1,12 @@
 <?php
 
-use Behat\Behat\Context\BehatContext;
+use Behat\Behat\Context\Context;
 use ETNA\RSA\RSA;
 
 /**
  * Features context.
  */
-class FeatureContext extends BehatContext
+class FeatureContext implements Context
 {
     static private $_parameters;
 
@@ -24,9 +24,9 @@ class FeatureContext extends BehatContext
      *
      * @param array $parameters context parameters (set them up through behat.yml)
      */
-    public function __construct(array $parameters)
+    public function __construct()
     {
-        self::$_parameters = $parameters;
+        // self::$_parameters = $parameters;
     }
 
     /**
