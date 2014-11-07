@@ -18,9 +18,9 @@ Plan du Scénario: Je lis une clé privée ou public qui n'existe pas
     Et que cette clé <domaine> est invalide
     Alors je devrais obtenir une exception <exception>
     Exemples:
-        | domaine | exception               |
-        | privée  | "Private Key not found" |
-        | public  | "Public Key not found"  |
+        | domaine | exception         |
+        | privée  | "Bad Private Key" |
+        | public  | "Bad Public Key"  |
 
 Plan du Scénario: Je lis une clé privée ou public invalide
     Etant donné que ma clé <domaine> se trouve dans "tmp/keys/blu.txt"

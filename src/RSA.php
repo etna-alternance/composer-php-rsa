@@ -8,42 +8,36 @@ class RSA
     private $public  = null;
 
     /**
-     * @param string $path to the private key
+     * @param mixed $key can be one of the following:
+     *  - a string having the format file://path/to/file.pem. The named file must contain a PEM encoded private key.
+     *  - A PEM formatted private key.
      * @param string $password if the key is password protected
      * @return RSA
      */
-    public static function loadPrivateKey($path, $password = "")
+    public static function loadPrivateKey($key, $password = "")
     {
-        $file = realpath($path);
-        if (false === $file) {
-            throw new \Exception("Private Key not found");
-        }
-
-        $private_key = openssl_pkey_get_private("file://{$file}", $password);
+        $private_key = openssl_pkey_get_private($key, $password);
         if (false === $private_key) {
             throw new \Exception("Bad Private Key");
         }
 
         $public_key = openssl_pkey_get_public(openssl_pkey_get_details($private_key)["key"]);
         if (false === $public_key) {
-            throw new \Exception("Bad Public Key");
+            throw new \Exception("Error getting Public Key");
         }
 
         return new self($public_key, $private_key);
     }
 
     /**
-     * @param string $path to the public key
+     * @param mixed $key can be one of the following:
+     *  - a string having the format file://path/to/file.pem. The named file must contain a PEM encoded public key.
+     *  - A PEM formatted public key.
      * @return RSA
      */
-    public static function loadPublicKey($path)
+    public static function loadPublicKey($key)
     {
-        $file = realpath($path);
-        if (false === $file) {
-            throw new \Exception("Public Key not found");
-        }
-
-        $public_key = openssl_pkey_get_public("file://{$file}");
+        $public_key = openssl_pkey_get_public($key);
         if (false === $public_key) {
             throw new \Exception("Bad Public Key");
         }

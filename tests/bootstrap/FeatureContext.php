@@ -173,6 +173,10 @@ class FeatureContext implements Context
             error_reporting(E_DEPRECATED);
         }
 
+        if (null === $this->rsa) {
+            throw new Exception("RSA must be instanciated");
+        }
+
         try {
             $this->sign = $this->rsa->sign($this->identity);
         } catch (Exception $e) {
@@ -195,7 +199,7 @@ class FeatureContext implements Context
 
     public function getAbsolutePath($relative_path)
     {
-        return __DIR__ . "/../../" . $relative_path;
+        return "file://" . __DIR__ . "/../../" . $relative_path;
     }
 
     /**
