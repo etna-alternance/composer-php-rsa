@@ -3,7 +3,7 @@
 @feature/rsa/rsa
 Fonctionnalité: Je manipule des clés privées
 
-Plan du Scénario: Je lis une clé public ou privée
+Plan du Scénario: Je lis une clé public ou privée dans un fichier
     Etant donné que ma clé <domaine> se trouve dans <keypath>
     Et que cette clé <domaine> est valide
     Alors je devrais obtenir un objet RSA
@@ -13,7 +13,7 @@ Plan du Scénario: Je lis une clé public ou privée
         | privée  | "tmp/keys/private.key" |
         | public  | "tmp/keys/public.key"  |
 
-Plan du Scénario: Je lis une clé privée ou public qui n'existe pas
+Plan du Scénario: Je lis une clé privée ou public dans un fichier qui n'existe pas
     Etant donné que ma clé <domaine> se trouve dans "tmp/toto.txt"
     Et que cette clé <domaine> est invalide
     Alors je devrais obtenir une exception <exception>
@@ -24,6 +24,25 @@ Plan du Scénario: Je lis une clé privée ou public qui n'existe pas
 
 Plan du Scénario: Je lis une clé privée ou public invalide
     Etant donné que ma clé <domaine> se trouve dans "tmp/keys/blu.txt"
+    Et que cette clé <domaine> est invalide
+    Alors je devrais obtenir une exception <exception>
+    Exemples:
+        | domaine | exception         |
+        | privée  | "Bad Private Key" |
+        | public  | "Bad Public Key"  |
+
+Plan du Scénario: Je charge une clé public ou privée
+    Etant donné que je connais la clé <domaine> qui est dans <keypath>
+    Et que cette clé <domaine> est valide
+    Alors je devrais obtenir un objet RSA
+    Et sa clé public devrait ressembler à "tmp/keys/public.key"
+    Exemples:
+        | domaine | keypath                |
+        | privée  | "tmp/keys/private.key" |
+        | public  | "tmp/keys/public.key"  |
+
+Plan du Scénario: Je charge une clé privée ou public invalide
+    Etant donné que je connais la clé <domaine> qui est dans "tmp/keys/blu.txt"
     Et que cette clé <domaine> est invalide
     Alors je devrais obtenir une exception <exception>
     Exemples:

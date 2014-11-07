@@ -128,7 +128,7 @@ class FeatureContext implements Context
      */
     public function queMaClePriveeSeTrouveDans($private_path)
     {
-        $this->private_path = $this->getAbsolutePath($private_path);
+        $this->private_path = "file://" . $this->getAbsolutePath($private_path);
     }
 
     /**
@@ -136,7 +136,23 @@ class FeatureContext implements Context
      */
     public function queMaClePublicSeTrouveDans($public_path)
     {
-        $this->public_path = $this->getAbsolutePath($public_path);
+        $this->public_path = "file://" . $this->getAbsolutePath($public_path);
+    }
+
+    /**
+     * @Given /^que je connais la clé privée qui est dans "([^"]*)"$/
+     */
+    public function queJeConnaisLaClePrivee($private_path)
+    {
+        $this->private_path = file_get_contents($this->getAbsolutePath($private_path));
+    }
+
+    /**
+     * @Given /^que je connais la clé public qui est dans "([^"]*)"$/
+     */
+    public function queJeConnaisLaClePublic($public_path)
+    {
+        $this->public_path = file_get_contents($this->getAbsolutePath($public_path));
     }
 
     /**
@@ -190,7 +206,7 @@ class FeatureContext implements Context
     public function jeDoisPouvoirLaVerifier($public_path=null)
     {
         if ($public_path !== null) {
-            $this->rsa = RSA::loadPublicKey($this->getAbsolutePath($public_path));
+            $this->rsa = RSA::loadPublicKey("file://" . $this->getAbsolutePath($public_path));
         }
         if (false === $this->rsa->verify($this->identity, $this->sign)) {
             throw new Exception("L'identité n'a pas pu être vérifiée");
@@ -199,7 +215,7 @@ class FeatureContext implements Context
 
     public function getAbsolutePath($relative_path)
     {
-        return "file://" . __DIR__ . "/../../" . $relative_path;
+        return __DIR__ . "/../../" . $relative_path;
     }
 
     /**
